@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wrapper {
+  display: inline-block;
+}
+.wrapper:hover .underline {
+  width: 100%;
+}
+.wrapper:hover span {
+  color: rgb(250, 204, 21);
+}
+.underline {
+  width: 0;
+  height: 2px;
+  background-color: rgb(250, 204, 21);
+  transition: all 0.3s ease-in-out;
+}
+
+.locations-banner {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  border-radius: 3em;
+  font-size: 0.7em;
+  z-index: 51;
+  overflow: hidden;
+  transform: scale(0);
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.locations-wrapper:hover .locations-banner {
+  transform: scale(1);
+  background-color: #fff;
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}

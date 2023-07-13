@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model City {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  counties County[]
+  properties Property[]
+}
+
+model County {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  city City @relation(fields: [cityId], references: [id], onDelete:Cascade)
+  cityId String  @db.ObjectId 
+  properties Property[]
+}
+
+model PropertyType {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  type String //daire
+  properties Property[]
+}
+model Property{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  titleTr String
+  titleEn String
+  descriptionTr String
+  descriptionEn String
+  slug  String
+  referenceNo Int @unique
+  price Int
+  images String[]
+  squareMeter Int
+  livingroom Int
+  bedroom Int
+  bathroom Int
+  tags String[] // ["City View", "'Luxury"]
+  features String[] // [" Elevator", "'White Goods"]
+  indoorFacilities String[] //[" Ceramic Floor", "Turkish Bath"]
+  outdoorFacilities String[] //[" BBQ Area", "Fitness"]
+  cityId String  @db.ObjectId
+  city City @relation(fields: [cityId], references: [id], onDelete:Cascade)
+  countyId String  @db.ObjectId
+  county County @relation(fields: [countyId], references: [id], onDelete:Cascade)
+  propertyTypeId String   @db.ObjectId
+  propertyType PropertyType @relation(fields: [propertyTypeId], references: [id], onDelete:Cascade) 
+}
