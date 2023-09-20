@@ -5,6 +5,7 @@ export const getCountiesByCityName = async (
 ): Promise<ICounty[]> => {
   const data = await fetch(`http://localhost:3000/api/county?city=${city}`);
   const counties = await data.json();
+  console.log(counties);
 
   return counties;
 };
